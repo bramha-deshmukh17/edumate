@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Animation</title>
+<style>
+#loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: backgroun 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.ball {
+  width: 30px;
+  height: 30px;
+  background-color: #00aaff;
+  border-radius: 50%;
+  margin: 0 10px;
+  animation: bounce 1s ease-in-out 0.01s infinite;
+  box-shadow: 0 5px 20px rgb(0, 0, 0);
+}
+
+.ball:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.ball:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80% {
+    transform: translateY(0);
+    filter: hue-rotate(0deg);
+  }
+  40% {
+    transform: translateY(-30px);
+    filter: hue-rotate(90deg);
+  }
+  60% {
+    transform: translateY(-15px);
+    filter: hue-rotate(180deg);
+  }
+  100%{
+    transform: translateY(0);
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes backgroun {
+  0% {
+    background: rgb(0, 0, 0)
+  }
+  10% {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  20% {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  30% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  40% {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  60% {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  80% {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  90% {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+.button {
+      position: relative;
+      display: inline-block;
+      padding: 100px 200px;
+      background-color: #000000; /* Default background color */
+      color: #fff; /* Default text color */
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    /* Hover effect */
+    .button::before {
+      content: "";
+      position: absolute;
+      top: var(--highlight-y, 0);
+      left: var(--highlight-x, 0);
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 80%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Increased blur effect */
+    }
+
+
+</style>
+</head>
+<body onload="loading()" bgcolor="#fff">
+    <div id="loading-container">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+      <button class="button" type="submit">Test</button>
+  
+
+  <script>
+  function loading() {
+  let x = Math.floor(Math.random() * 30)*100;
+
+  setTimeout(function() {
+    document.getElementById("loading-container").style.display = "none";
+  },3000); 
+}
+
+
+document.addEventListener('mousemove', function(e) {
+      const button = document.querySelector('.button');
+      const buttonRect = button.getBoundingClientRect();
+
+      const x = e.clientX - buttonRect.left;
+      const y = e.clientY - buttonRect.top;
+
+      button.style.setProperty('--highlight-x', `${x}px`);
+      button.style.setProperty('--highlight-y', `${y}px`);
+    });
+
+  </script>
+</body>
+</html>
